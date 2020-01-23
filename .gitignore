@@ -1,3 +1,5 @@
 
 dat/*.xml
+dat/radk*
+dat/krad*
 
