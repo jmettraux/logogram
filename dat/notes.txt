@@ -1,6 +1,0 @@
-
-iconv -f EUC-JP -t UTF-8 radkfile > radkfile.txt
-iconv -f EUC-JP -t UTF-8 radkfile2 > radkfile2.txt
-iconv -f EUC-JP -t UTF-8 kradfile2 > kradfile2.txt
-iconv -f EUC-JP -t UTF-8 kradfile > kradfile.txt
-

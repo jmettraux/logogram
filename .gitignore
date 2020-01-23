@@ -1,6 +1,6 @@
 
-dat/*.xml
-dat/radk*
-dat/krad*
-dat/edict*
+var/*.xml
+var/radk*
+var/krad*
+var/edict*
 
