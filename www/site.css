@@ -1,0 +1,15 @@
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  color: white;
+  background-color: black;
+}
+
+.box {
+  display: inline-block;
+  border: 1px solid white;
+  width: 51px;
+  height: 64px;
+}
+
