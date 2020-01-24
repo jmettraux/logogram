@@ -4,3 +4,6 @@ var/radk*
 var/krad*
 var/edict*
 
+var/kanji.rb
+var/kanji.pretty.json
+
