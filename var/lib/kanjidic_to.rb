@@ -104,13 +104,13 @@ class KanjiListener
 end
 
 
-kl = KanjiListener.new
+l = KanjiListener.new
 
-REXML::Document.parse_stream(File.new(ARGV[0]), kl)
+REXML::Document.parse_stream(File.new(ARGV[0]), l)
 
 case ARGV[1]
-when 'ruby', 'rb', '.rb' then pp(kl.characters)
-when 'pretty' then puts JSON.pretty_generate(kl.characters)
-else puts JSON.dump(kl.characters)
+when 'ruby', 'rb', '.rb' then pp(l.characters)
+when 'pretty' then puts JSON.pretty_generate(l.characters)
+else puts JSON.dump(l.characters)
 end
 

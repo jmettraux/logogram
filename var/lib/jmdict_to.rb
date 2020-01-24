@@ -9,7 +9,7 @@ class DictListener
 
   include REXML::StreamListener
 
-  #attr_reader :characters
+  attr_reader :entries
 
   def initialize
     super
@@ -43,93 +43,100 @@ class DictListener
   #def narrow(t); t.match(/^\d+$/) ? t.to_i : t; end
   def de_entitize(t); m = t.match(/^&([^;]+);$/); m ? m[1] : t; end
 
-  def on_entry_end(*args)
-    return if entry[:seq] < 1001000
-puts ">" * 80
-pp @entries
-exit 0
-  end
   def on_entry_start(*args)
     @entries << {}
+#  def on_entry_end(*args)
+#    return if entry[:seq] < 1001000
+#puts ">" * 80
+#pp @entries
+#exit 0
+#  end
   end
   def on_ent_seq_text(t)
     entry[:seq] = t.to_i
   end
   def on_keb_text(t)
-    (entry[:ks] ||= []) << [ t ]
+    (entry[:ks] ||= []) << { t: t }
   end
   def on_ke_inf_text(t)
-    entry[:ks].last << de_entitize(t)
+    (entry[:ks].last[:infs] ||= []) << de_entitize(t)
   end
   def on_ke_pri_text(t)
-    (entry[:ks].last) << t
+    (entry[:ks].last[:pris] ||= []) << t
   end
-##
   def on_reb_text(t)
-    (entry[:rs] ||= []) << [ t ]
+    (entry[:rs] ||= []) << { t: t }
   end
-  def on_re_nokanji_start
-    entry[:rs].last << 'nokanji'
+  def on_re_nokanji_text(t)
+    t = t.strip; t = t == '' ? true : t
+    entry[:rs].last[:nokanji] = t
   end
-#  def on_literal_text(t)
-#    char[:lit] = t
-#  end
-#  def on_cp_value_text(t)
-#    (char[:cps] ||= {})[tag['cp_type']] = t
-#  end
-#  def on_rad_value_text(t)
-#    (char[:rvs] ||= {})[tag['rad_type']] = t.to_i
-#  end
-#  def on_stroke_count_text(t)
-#    char[:sc] = t.to_i
-#  end
-#  def on_grade_text(t)
-#    char[:grd] = t.to_i
-#  end
-#  def on_freq_text(t)
-#    char[:frq] = t.to_i
-#  end
-#  def on_jlpt_text(t)
-#    char[:jlpt] = t.to_i
-#  end
-#  def on_dic_ref_text(t)
-#    type = tag['dr_type']
-#    (char[:drs] ||= {})[type] = narrow(t)
-#    a = tag['m_vol']; char[:drs]['moro_vol'] = narrow(a) if a
-#    a = tag['m_page']; char[:drs]['moro_page'] = narrow(a) if a
-#  end
-#  def on_q_code_text(t)
-#    type = tag['qc_type']
-#    skimis = tag['skip_misclass']
-#    type = [ type, '_skip_misclass', skimis ].join('_') if skimis
-#    (char[:qcs] ||= {})[type] = t
-#  end
-#  def on_reading_text(t)
-#    ((char[:rds] ||= {})[tag['r_type']] ||= []) << t
-#  end
-#  def on_meaning_text(t)
-#    return unless [ nil, 'en' ].include?(tag['m_lang'])
-#    ((char[:mns] ||= {})[tag['m_lang'] || 'en'] ||= []) << t
-#  end
-#  def on_nanori_text(t)
-#    (char[:nnrs] ||= []) << t
-#  end
-#  def on_variant_text(t)
-#    ((char[:vrs] ||= {})[tag['var_type']] ||= []) << t
-#  end
-#  def on_rad_name_text(t)
-#    (char[:rdns] ||= []) << t
-#  end
+  def on_re_inf_text(t)
+    (entry[:rs].last[:infs] ||= []) << de_entitize(t)
+  end
+  def on_re_pri_text(t)
+    (entry[:rs].last[:pris] ||= []) << t
+  end
+  def on_re_restr_text(t)
+    (entry[:rs].last[:restrs] ||= []) << t
+  end
+
+  def sense; entry[:senses].last; end
+
+  def on_sense_start(*args)
+    (entry[:senses] ||= []) << {}
+  end
+  def on_stagk_text(t)
+    (sense[:stagks] ||= []) << t
+  end
+  def on_stagr_text(t)
+    (sense[:stagrs] ||= []) << t
+  end
+  def on_pos_text(t)
+    (sense[:poses] ||= []) << de_entitize(t)
+  end
+  def on_xref_text(t)
+    (sense[:xrefs] ||= []) << t
+  end
+  def on_ant_text(t)
+    (sense[:ants] ||= []) << t
+  end
+  def on_field_text(t)
+    (sense[:fields] ||= []) << de_entitize(t)
+  end
+  def on_misc_text(t)
+    (sense[:miscs] ||= []) << de_entitize(t)
+  end
+  def on_s_inf_text(t)
+    (sense[:s_infs] ||= []) << t
+  end
+  def on_dial_text(t)
+    (sense[:dials] ||= []) << de_entitize(t)
+  end
+  def on_lsource_text(t)
+    v = { t: t }
+    a = tag['xml:lang']; v[:lang] = a if a
+    a = tag['ls_type']; v[:type] = a if a
+    a = tag['ls_wasei']; v[:wasei] = a if a
+    (sense[:lsources] ||= []) << v
+  end
+  def on_gloss_text(t)
+    v = { t: t }
+    a = tag['xml:lang']; v[:lang] = a if a
+    a = tag['g_end']; v[:end] = a if a
+    a = tag['g_type']; v[:type] = a if a
+    (sense[:glosses] ||= []) << v
+  end
 end
 
 
-kl = DictListener.new
+l = DictListener.new
 
-REXML::Document.parse_stream(File.new(ARGV[0]), kl)
+REXML::Document.parse_stream(File.new(ARGV[0]), l)
 
 case ARGV[1]
-when 'ruby', 'rb', '.rb' then pp(kl.characters)
-when 'pretty' then puts JSON.pretty_generate(kl.characters)
-else puts JSON.dump(kl.characters)
+when 'ruby', 'rb', '.rb' then pp(l.entries)
+when 'pretty' then puts JSON.pretty_generate(l.entries)
+else puts JSON.dump(l.entries)
 end
 
