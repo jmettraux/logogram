@@ -4,6 +4,8 @@
 # the id of the group is the first kanji
 # one change makes them "neighbours"
 
+# for now, ignore lists with a single element
+
 業僕撲
 滋磁
 目相
@@ -45,9 +47,17 @@
 足促
 田畑
 広鉱
+志誌
 
 百
 項
+
+相
+祖租組
+怪径経軽
+更便硬
+
+懐壊
 
 # I need a list of kanji ordered by stroke count
 
