@@ -1,0 +1,3 @@
+
+window.clog = console.log;
+
