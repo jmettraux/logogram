@@ -1,0 +1,53 @@
+
+# one group per line (in stroke count order, hopefully)
+# kanji with the same (top-)right compound
+# the id of the group is the first kanji
+# one change makes them "neighbours"
+
+業僕撲
+滋磁
+目相
+組
+朝潮
+定掟
+懲徴
+巨距
+沈枕
+誰難離
+鳥鶏
+島
+列烈
+衣裂襲袋
+祭察擦
+沼昭詔
+口和
+山岳
+分紛粉
+怪経
+音意
+票標
+寺待持特
+斤析釿
+少秒
+描猫
+成誠
+孫遜
+楽薬
+中仲忠
+卵
+者
+物
+牧
+由油
+衣裂装
+避壁
+貝買貿
+足促
+田畑
+広鉱
+
+百
+項
+
+# I need a list of kanji ordered by stroke count
+
