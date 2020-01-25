@@ -1,4 +1,6 @@
 
+/* site.css */
+
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -9,7 +11,12 @@ body {
 .box {
   display: inline-block;
   border: 1px solid white;
-  width: calc(100vw / 8);
-  height: calc(100vw / 8 * 1.5);
+  --w: calc(100vw / 8);
+  width: var(--w);
+  height: calc(var(--w) * 1.4);
+  text-align: center;
+  vertical-align: middle;
+  font-family: var(--japanese-font-family);
+  font-size: 280%;
 }
 
