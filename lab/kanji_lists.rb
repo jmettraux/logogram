@@ -18,20 +18,22 @@ JSON.parse(File.read('var/kanji.json')).each do |k|
   frq = k['frq']
 
   count += 1
-  known << lit if grd || jlpt || frq
-  unknown << lit unless grd || jlpt || frq
+  known << k if grd || jlpt || frq
+  unknown << k unless grd || jlpt || frq
 
   (index["g#{grd}"] ||= []) << lit if grd
   (index["j#{jlpt}"] ||= []) << lit if jlpt
 end
 
-#index = index.inject({}) { |h, (k, v)| h[k] = v.join; h }
-#
-#pp index
 puts "#{known.size}/#{count}"
-#p unknown.size
-#
-#puts
-#known.each { |lit| print lit }
-##unknown.each { |lit| print lit }
+
+by_scount = known
+  .inject({}) { |h, k| (h[k['sc']] ||= []) << k; h }
+  .each { |sc, ks| ks.sort_by! { |k| k['grd'] || 99 } }
+
+by_scount.keys.sort.each do |sc|
+  puts "#{sc}:"
+  by_scount[sc].each { |k| print k['lit'] }
+  puts
+end
 
