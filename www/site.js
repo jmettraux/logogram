@@ -43,11 +43,17 @@ var Grid = (function() {
 
   // done.
 
+  this.init = function() {
+    clog(H.dim('body'));
+  };
+
   return this;
 
 }).apply({}); // end Grid
 
 
 H.onDocumentReady(function() {
+
+  Grid.init();
 });
 

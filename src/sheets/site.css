@@ -9,7 +9,7 @@ body {
 .box {
   display: inline-block;
   border: 1px solid white;
-  width: 51px;
-  height: 64px;
+  width: calc(100vw / 8);
+  height: calc(100vw / 8 * 1.5);
 }
 
