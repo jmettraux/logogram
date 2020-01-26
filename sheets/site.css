@@ -24,12 +24,15 @@ body {
 }
 
 .box {
-  display: inline-block;
+  display: block;
   text-align: center;
   vertical-align: middle;
-  border: 1px solid white;
+  border: 1px solid #212121;
   width: var(--box-w);
   height: var(--box-h);
+  font-size: 2rem;
+  padding-top: 0.35rem;
+  font-family: var(--japanese-font-family);
 }
 .box.blank {
   border: 0px;
@@ -44,13 +47,14 @@ body {
 #four-corners {
   display: grid;
   grid-template-columns: calc(var(--box-w) * 2) calc(var(--box-w) * 3) auto;
-  grid-template-rows: calc(var(--box-h) * 3) auto;
+  grid-template-rows: calc(var(--box-h) * 4) auto;
   grid-column-gap: calc(var(--box-w) / 5);
   grid-row-gap: calc(var(--box-w) / 3);
 }
 #four-corners .corners {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
 }
 #four-corners .nines {
   display: flex;
