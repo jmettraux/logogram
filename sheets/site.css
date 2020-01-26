@@ -11,6 +11,7 @@ body {
 .container {
   width: 100%;
   margin: 0.2rem;
+  position: relative;
 }
 
 .box {
@@ -26,9 +27,21 @@ body {
 }
 
 .navigation-context .nav {
-  display: block;
 }
 .navigation-context .list {
+}
+
+#four-corners .corners {
+  width: calc(var(--box-w) * 2);
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+#four-corners .nines {
+  width: calc(var(--box-w) * 3);
+  position: absolute;
+  left: calc(var(--box-w) * 2 + 1.35rem);
+  top: 1rem;
 }
 
 @media(orientation: portrait) {
