@@ -29,8 +29,12 @@ arguments[c];if(!1===g)return null;if(null!==g){var f="string"===typeof g;if(!f|
 a.substring(a.indexOf("{")+1,a.lastIndexOf("}")),e=document&&document.location&&document.location.href;if(e){var f=e.lastIndexOf("/");0>f&&(f=e.length-1);e=e.substring(0,f)+"/";a='var rootUrl = "'+e+'";'+a}a=new Blob([a]);c=new Worker(window.URL.createObjectURL(a));c.on=function(a,b){c.addEventListener(a,b,!1)};return c};return this}.apply({});
 /* minified from commit 028b4eb on Wed Nov 13 14:39:05 JST 2019 */
 
+// common.js
+
 window.clog = console.log;
 
+
+// grid.js
 
 var Grid = (function() {
 
@@ -51,6 +55,8 @@ var Grid = (function() {
 
 }).apply({}); // end Grid
 
+
+// ready.js
 
 H.onDocumentReady(function() {
 

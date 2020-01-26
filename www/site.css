@@ -348,6 +348,8 @@ template {
   display: none;
 }
 
+/* variable.css */
+
 :root {
 
   /* fonts */
@@ -356,6 +358,8 @@ template {
   --japanese-font-family: 'Kosugi Maru', sans-serif;
 }
 
+
+/* site.css */
 
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -367,12 +371,24 @@ body {
 .box {
   display: inline-block;
   border: 1px solid white;
-  --w: calc(100vw / 8);
-  width: var(--w);
-  height: calc(var(--w) * 1.4);
   text-align: center;
   vertical-align: middle;
   font-family: var(--japanese-font-family);
   font-size: 280%;
+}
+
+@media(orientation: portrait) {
+  .box {
+    --w: calc(100vw / 8);
+    width: var(--w);
+    height: calc(var(--w) * 1.4);
+  }
+}
+@media(orientation: landscape) {
+  .box {
+    --w: calc(100vw / 16);
+    width: var(--w);
+    height: calc(var(--w) * 1.4);
+  }
 }
 
