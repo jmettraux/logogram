@@ -8,6 +8,9 @@ window.onresize = function(ev) {
 
 H.onDocumentReady(function() {
 
-  //Grid.init();
+  H.hide('.navigation-context');
+  H.unhide('#four-corners');
+
+  Container.init();
 });
 

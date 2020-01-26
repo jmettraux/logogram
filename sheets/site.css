@@ -8,7 +8,7 @@ body {
   background-color: black;
 }
 
-.grid {
+.container {
   width: 100%;
   margin: 0.2rem;
 }
@@ -18,5 +18,21 @@ body {
   text-align: center;
   vertical-align: middle;
   border: 1px solid white;
+  width: var(--box-w);
+  height: calc(var(--box-w) * 1.4);
+}
+.box.blank {
+  border: 0px;
+}
+
+.navigation-context .nav {
+  display: block;
+}
+.navigation-context .list {
+}
+
+@media(orientation: portrait) {
+}
+@media(orientation: landscape) {
 }
 
