@@ -1,6 +1,12 @@
 
 /* site.css */
 
+:root {
+  --portrait-slots: 8.1;
+  --landscape-slots: 16.1;
+  --box-h: calc(var(--box-w) * 1.4);
+}
+
 *, *::before, *::after { box-sizing: border-box; }
 
 body {
@@ -8,10 +14,8 @@ body {
   background-color: black;
 }
 
-.container {
-  width: 100%;
+#container {
   margin: 0.2rem;
-  position: relative;
 }
 
 .box {
@@ -20,32 +24,43 @@ body {
   vertical-align: middle;
   border: 1px solid white;
   width: var(--box-w);
-  height: calc(var(--box-w) * 1.4);
+  height: var(--box-h);
 }
 .box.blank {
   border: 0px;
 }
 
-.navigation-context .nav {
-}
-.navigation-context .list {
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 
+#four-corners {
+  display: grid;
+  grid-template-columns: calc(var(--box-w) * 2) calc(var(--box-w) * 3) auto;
+  grid-template-rows: calc(var(--box-h) * 3) auto;
+  grid-column-gap: calc(var(--box-w) / 5);
+  grid-row-gap: calc(var(--box-w) / 3);
+}
 #four-corners .corners {
-  width: calc(var(--box-w) * 2);
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 #four-corners .nines {
-  width: calc(var(--box-w) * 3);
-  position: absolute;
-  left: calc(var(--box-w) * 2 + 1.35rem);
-  top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+#four-corners .list {
+  grid-column: 1 / span 3;
+  grid-row: 2 / span 1;
 }
 
-@media(orientation: portrait) {
-}
 @media(orientation: landscape) {
+
+  #four-corners .list {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 2;
+  }
 }
 

@@ -46,8 +46,12 @@ var Container = (function() {
 
   var resize = function() {
 
+    var p = getComputedStyle(document.documentElement).getPropertyValue('--portrait-slots');
+    var l = getComputedStyle(document.documentElement).getPropertyValue('--landscape-slots');
+
     var w = H.dim('#container').width;
-    w = w / ([ 0, 180 ].includes(window.orientation) ? 8 : 16);
+    w = w / ([ 0, 180 ].includes(window.orientation) ? p : l);
+clog([ p, l, w ]);
 
     document.documentElement.style.setProperty('--box-w', '' + w + 'px');
   };
