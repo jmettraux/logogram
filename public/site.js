@@ -34,42 +34,54 @@ a.substring(a.indexOf("{")+1,a.lastIndexOf("}")),e=document&&document.location&&
 window.clog = console.log;
 
 
-// grid.js
+// container.js
 
-var Area = {
-};
-
-var Grid = (function() {
+var Container = (function() {
 
   "use strict";
 
-  var self = this;
-
-  var boxWidth = 0;
-  var boxHeight = 0;
-  var borderWidth = 1; // px
-
-  var orientation = 'portrait';
-
-  var lgOrientation = 'euro';
-  //var lgOrientation = 'asia';
-
-  var areas = {};
+  //var self = this;
 
   // protected functions
 
-  var computeOrientation = function() {
+  //var computeOrientation = function() {
+  //  var o = window.orientation;
+  //  return (o === 0 || o === 180) ? 'portrait' : 'landscape';
+  //};
 
-    var o = window.orientation;
-    return (o === 0 || o === 180) ? 'portrait' : 'landscape';
+  var find = function(list, fun) {
+
+    for (var i = 0, l = list.length; i < l; i++) {
+      var e = list[i]; if (fun(e, i)) return e;
+    }
+    return null;
   };
 
-  var reorganize = function() {
-clog('reorganize');
-  };
+  var sheet = find(
+    document.styleSheets,
+    function(s) { return s.href && s.href.match(/\/site.css/); });
 
   var resize = function() {
-clog('resize');
+
+    //var sheet = document.styleSheets
+    //  .find(function(s) { return s.href && s.href.match(/\/site.css/); });
+//clog(sheet);
+
+//clog(window.orientation);
+    //var w = window.innerWidth;
+    var w = H.dim('#container').width;
+clog(w);
+
+    if ([ 0, 180 ].includes(window.orientation)) { // portrait
+      w = w / 8;
+    }
+    else { // landscape
+      w = w / 16;
+    }
+    var h = w * 1.4;
+clog(w, h);
+    if (sheet.cssRules[0].selectorText === '.box') sheet.deleteRule(0);
+    sheet.insertRule('.box { width: ' + w + 'px; height: ' + h + 'px; }', 0);
   };
 
   // public functions
@@ -77,13 +89,10 @@ clog('resize');
   this.resize = function() {
 
     resize();
-
-    var o = computeOrientation();
-    if (o !== orientation) { orientation = o; reorganize(); }
   };
 
   this.init = function() {
-    orientation = computeOrientation();
+
     self.resize();
   };
 
@@ -91,18 +100,18 @@ clog('resize');
 
   return this;
 
-}).apply({}); // end Grid
+}).apply({}); // end Container
 
 
 // on.js
 
 window.onresize = function(ev) {
 
-  Grid.resize();
+  Container.resize();
 }
 
 H.onDocumentReady(function() {
 
-  Grid.init();
+  //Grid.init();
 });
 

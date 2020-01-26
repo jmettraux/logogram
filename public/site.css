@@ -373,31 +373,10 @@ body {
   margin: 0.2rem;
 }
 
-/*
 .box {
   display: inline-block;
-  border: 1px solid white;
   text-align: center;
   vertical-align: middle;
-  font-family: var(--japanese-font-family);
-  font-size: 280%;
+  border: 1px solid white;
 }
-
-@media(orientation: portrait) {
-  .box {
-    --w: calc(100% / 8);
-    width: var(--w);
-    height: calc(var(--w) * 1.4);
-  }
-}
-@media(orientation: landscape) {
-  .box {
-    --w: calc(100% / 16);
-    width: var(--w);
-    height: calc(var(--w) * 1.4);
-    width: calc(100% / 16);
-    height: calc(attr(width) * 1.4);
-  }
-}
-*/
 

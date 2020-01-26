@@ -3,11 +3,11 @@
 
 window.onresize = function(ev) {
 
-  Grid.resize();
+  Container.resize();
 }
 
 H.onDocumentReady(function() {
 
-  Grid.init();
+  //Grid.init();
 });
 
