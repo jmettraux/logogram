@@ -40,6 +40,9 @@ body {
 .box.selected {
   border: 1px solid white;
 }
+.box.double {
+  width: calc(var(--box-w) * 2);
+}
 
 .list {
   display: flex;
@@ -63,9 +66,17 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
+#four-corners .nine {
+  color: grey;
+}
 #four-corners .list {
   grid-column: 1 / span 3;
   grid-row: 2 / span 1;
+}
+#four-corners .display {
+  font-size: 91%;
+  color: grey;
+  padding-top: 0.49em;
 }
 
 @media(orientation: landscape) {

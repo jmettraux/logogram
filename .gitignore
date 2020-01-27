@@ -11,3 +11,7 @@ var/kanji.pretty.json
 var/dict.rb
 var/dict.pretty.json
 
+public/data.js
+public/site.js
+public/site.css
+
