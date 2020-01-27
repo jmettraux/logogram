@@ -9,40 +9,24 @@ var FourCorners = (function() {
 
   var elt = null;
 
+  var map = null;
+
   // protected functions
 
-  var lookup = function() {
+  var toCode = function(sel) {
 
-    H.remove(elt, '.list .box');
-
-    var pat = H.text(elt, '.display');
-
-    if (pat === '----.-') return;
-
-    pat = '^' + pat.replace('.', '\\.').replace(/-/g, '.') + '$';
-
-    var list = H.elt(elt, '.list');
-
-    lgdata.kanji.forEach(function(k) {
-      var fc = k.qcs && k.qcs.four_corner;
-      if ( ! fc) return;
-      if (fc.match(pat)) H.create(list, '.box', {}, k.lit);
-    });
+    var t = H.text(elt, sel);
+    return t === '' ? '-' : map[t];
   };
 
-  var compute = function() {
+  var reshow = function() {
 
     var s =
-      (H.getAtt(elt, '.box.nw', '-lg-i') || '-') +
-      (H.getAtt(elt, '.box.ne', '-lg-i') || '-') +
-      (H.getAtt(elt, '.box.sw', '-lg-i') || '-') +
-      (H.getAtt(elt, '.box.se', '-lg-i') || '-') +
-      '.' +
-      (H.getAtt(elt, '.box.ese', '-lg-i') || '-');
+      toCode('.box.nw') + toCode('.box.ne') +
+      toCode('.box.sw') + toCode('.box.se') +
+      '.' + toCode('.box.ese');
 
-    H.setText(elt, '.display', s);
-
-    lookup();
+    window.location.hash = '#four-corners/' + s;
   };
 
   var cornerClick = function(ev) {
@@ -60,21 +44,55 @@ var FourCorners = (function() {
     if ( ! c) return;
 
     c.textContent = n.textContent;
-    H.setAtt(c, '-lg-i', H.getAtt(n, '-lg-i'));
 
-    compute();
+    reshow();
   };
 
   // public functions
+
+  this.show = function(hs) {
+
+    var list = H.elt(elt, '.list');
+    H.remove(list, '.box');
+
+    var code = hs[1] || '----.-';
+
+    var e = H.elt(elt, '.box.nw'); var c = code[0];
+    e.textContent = map[c]; H.setAtt(e, '-lg-i', c);
+    e = H.elt(elt, '.box.ne'); c = code[1];
+    e.textContent = map[c]; H.setAtt(e, '-lg-i', c);
+    e = H.elt(elt, '.box.sw'); c = code[2];
+    e.textContent = map[c]; H.setAtt(e, '-lg-i', c);
+    e = H.elt(elt, '.box.se'); c = code[3];
+    e.textContent = map[c]; H.setAtt(e, '-lg-i', c);
+    e = H.elt(elt, '.box.ese'); c = code[5];
+    e.textContent = map[c]; H.setAtt(e, '-lg-i', c);
+
+    if (code === '----.-') return;
+
+    var pat = '^' + code.replace('.', '\\.').replace(/-/g, '.') + '$';
+
+    lgdata.kanji.forEach(function(k) {
+      var fc = k.qcs && k.qcs.four_corner;
+      if ( ! fc) return;
+      if (fc.match(pat)) H.create(list, '.box', {}, k.lit);
+    });
+  };
 
   this.init = function() {
 
     elt = H.elt('#four-corners');
 
+    map = {};
+    H.forEach(elt, '.nine', function(e) {
+      var t = H.text(e);
+      var i = H.getAtt(e, '-lg-i');
+      map[t] = i;
+      map[i] = t;
+    });
+
     H.on(elt, '.corners .box', 'click', cornerClick);
     H.on(elt, '.nines .box', 'click', nineClick);
-
-    compute();
   };
 
   // done.
