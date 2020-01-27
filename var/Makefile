@@ -5,10 +5,10 @@ JMdict_e.xml:
 	wget http://ftp.monash.edu.au/pub/nihongo/JMdict_e.gz
 	gunzip JMdict_e.gz
 	mv JMdict_e JMdict_e.xml
-dict.json: JMdict_e.xml
-	ruby lib/jmdict_to.rb JMdict_e.xml json > dict.json
-dict.rb: JMdict_e.xml
-	ruby lib/jmdict_to.rb JMdict_e.xml ruby > dict.rb
+full_dict.json: JMdict_e.xml
+	ruby lib/jmdict_to.rb JMdict_e.xml json > full_dict.json
+full_dict.rb: JMdict_e.xml
+	ruby lib/jmdict_to.rb JMdict_e.xml ruby > full_dict.rb
 
 kanjidic2.xml:
 	wget http://www.edrdg.org/kanjidic/kanjidic2.xml.gz
@@ -21,6 +21,11 @@ kanji.json: full_kanji.json
 	ruby lib/kanji_select.rb full_kanji.json json > kanji.json
 kanji.rb: full_kanji.json
 	ruby lib/kanji_select.rb full_kanji.json ruby > kanji.rb
+
+dict.json: kanji.json full_dict.json
+	ruby lib/dict_select.rb kanji.json full_dict.json json > dict.json
+dict.rb: kanji.json full_dict.json
+	ruby lib/dict_select.rb kanji.json full_dict.json ruby > dict.rb
 
 radkfile.txt:
 	wget http://ftp.monash.edu.au/pub/nihongo/kradzip.zip
