@@ -37,6 +37,9 @@ body {
 .box.blank {
   border: 0px;
 }
+.box.selected {
+  border: 1px solid white;
+}
 
 .list {
   display: flex;

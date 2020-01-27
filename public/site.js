@@ -34,6 +34,73 @@ a.substring(a.indexOf("{")+1,a.lastIndexOf("}")),e=document&&document.location&&
 window.clog = console.log;
 
 
+// box.js
+
+var Box = (function() {
+
+  "use strict";
+
+  //var self = this;
+
+  // protected functions
+
+  // public functions
+
+  this.select = function(ev_or_elt) {
+
+    var e = ev_or_elt.target ? ev_or_elt.target : ev_or_elt;
+    e = H.elt(e, '^.box');
+
+    if (H.hasClass(e, '.blank')) return null;
+
+    H.addClass(e, '.selected');
+    return e;
+  };
+
+  // done.
+
+  return this;
+
+}).apply({}); // end Box
+
+
+// fourcorners.js
+
+var FourCorners = (function() {
+
+  "use strict";
+
+  //var self = this;
+
+  var elt = null;
+
+  // protected functions
+
+  var cornerClick = function(ev) {
+    H.removeClass(elt, '.corners .box', '.selected');
+    var b = Box.select(ev);
+clog(b);
+  };
+  var nineClick = function(ev) {
+  };
+
+  // public functions
+
+  this.init = function() {
+
+    elt = H.elt('#four-corners');
+
+    H.on(elt, '.corners .box', 'click', cornerClick);
+    H.on(elt, '.nines .box', 'click', nineClick);
+  };
+
+  // done.
+
+  return this;
+
+}).apply({}); // end FourCorners
+
+
 // on.js
 
 //window.onresize = function(ev) {
@@ -43,5 +110,7 @@ H.onDocumentReady(function() {
 
   H.hide('.navigation-context');
   H.unhide('#four-corners');
+
+  FourCorners.init();
 });
 
