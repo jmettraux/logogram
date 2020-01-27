@@ -9,6 +9,8 @@ var/edict*
 var/*.rb
 var/*.xml
 var/*.txt
+var/dict.json
+var/kanji.json
 
 public/data.js
 public/site.js
