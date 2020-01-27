@@ -6,22 +6,20 @@
 
 window.onhashchange = function(ev) {
 
+  H.hide('.module');
+
   var u = new URL((ev && ev.newURL) || window.location.href);
   var hs = u.hash.split('/');
 
   var m = FourCorners;
-  //if (hs[0] === 'xxx') m = xxx;
-
-  H.hide('.container > .navigation-context');
+  if (hs[0] === '#kanji') m = Kanji;
 
   m.show(hs);
 };
 
 H.onDocumentReady(function() {
 
-  H.hide('.navigation-context');
-  H.unhide('#four-corners');
-
+  Kanji.init();
   FourCorners.init();
 
   onhashchange();

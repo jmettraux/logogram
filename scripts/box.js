@@ -18,6 +18,13 @@ var Box = (function() {
       '^.box');
   };
 
+  this.getText = function(ev_or_elt) {
+
+    var e = self.get(ev_or_elt);
+
+    return e ? e.textContent.trim() : null;
+  };
+
   this.select = function(ev_or_elt) {
 
     var e = self.get(ev_or_elt);

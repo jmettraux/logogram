@@ -48,9 +48,16 @@ var FourCorners = (function() {
     reshow();
   };
 
+  var kanjiClick = function(ev) {
+
+    window.location.hash = '#kanji/' + Box.getText(ev);
+  };
+
   // public functions
 
   this.show = function(hs) {
+
+    H.unhide(elt);
 
     var list = H.elt(elt, '.list');
     H.remove(list, '.box');
@@ -75,8 +82,10 @@ var FourCorners = (function() {
     lgdata.kanji.forEach(function(k) {
       var fc = k.qcs && k.qcs.four_corner;
       if ( ! fc) return;
-      if (fc.match(pat)) H.create(list, '.box', {}, k.lit);
+      if (fc.match(pat)) H.create(list, '.box.kanji', {}, k.lit);
     });
+
+    H.on(list, '.box.kanji', 'click', kanjiClick);
   };
 
   this.init = function() {
