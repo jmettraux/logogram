@@ -6,10 +6,9 @@ var/radk*
 var/krad*
 var/edict*
 
-var/kanji.rb
-var/kanji.pretty.json
-var/dict.rb
-var/dict.pretty.json
+var/*.rb
+var/*.xml
+var/*.txt
 
 public/data.js
 public/site.js
