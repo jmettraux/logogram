@@ -66,5 +66,8 @@
 
 宜
 
+束東
+束速
+
 # I need a list of kanji ordered by stroke count
 
