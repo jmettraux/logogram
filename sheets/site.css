@@ -1,17 +1,6 @@
 
 /* site.css */
 
-:root {
-  --box-w: calc((100vw - 0.4rem) / 8);
-  --box-h: calc(var(--box-w) * 1.4);
-}
-@media(orientation: landscape) {
-  :root {
-    --box-w: calc((100vw - 0.4rem) / 16);
-    --box-h: calc(var(--box-w) * 1.4);
-  }
-}
-
 *, *::before, *::after { box-sizing: border-box; }
 
 .hidden { display: none !important; }

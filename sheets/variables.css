@@ -1,11 +1,41 @@
 
 /* variable.css */
 
+/* fonts */
+
 :root {
 
-  /* fonts */
 
   --latin-font-family: Helvetica Neue;
   --japanese-font-family: 'Kosugi Maru', sans-serif;
+}
+
+/* boxes */
+
+:root {
+  --box-w: calc((100vw - 0.4rem) / 8);
+  --box-h: calc(var(--box-w) * 1.4);
+}
+@media(orientation: landscape) {
+  :root {
+    --box-w: calc((100vw - 0.4rem) / 16);
+    --box-h: calc(var(--box-w) * 1.4);
+  }
+}
+:root {
+  --box-w2: calc(var(--box-w) * 2);
+  --box-w3: calc(var(--box-w) * 3);
+  --box-w4: calc(var(--box-w) * 4);
+  --box-w5: calc(var(--box-w) * 5);
+  --box-w6: calc(var(--box-w) * 6);
+  --box-w7: calc(var(--box-w) * 7);
+  --box-w8: calc(var(--box-w) * 8);
+  --box-h2: calc(var(--box-h) * 2);
+  --box-h3: calc(var(--box-h) * 3);
+  --box-h4: calc(var(--box-h) * 4);
+  --box-h5: calc(var(--box-h) * 5);
+  --box-h6: calc(var(--box-h) * 6);
+  --box-h7: calc(var(--box-h) * 7);
+  --box-h8: calc(var(--box-h) * 8);
 }
 

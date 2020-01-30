@@ -1,0 +1,30 @@
+
+/* four_corners.css */
+
+#kanji {
+  display: grid;
+  grid-template-columns: var(--box-w2) var(--box-w2); var(--box-w4);
+  grid-template-rows: var(--box-h2) var(--box-h2) var(--box-h2) auto;
+  grid-column-gap: calc(var(--box-w) / 5);
+  grid-row-gap: calc(var(--box-w) / 3);
+}
+
+#kanji .kanji {
+  grid-column: 1 / span 2;
+  grid-row: 1 / span 2;
+  font-family: var(--japanese-font-family);
+  font-size: 8rem;
+}
+#kanji .onyomi {
+  grid-column: 3 / span 2;
+  grid-row: 1 / span 1;
+}
+#kanji .kunyomi {
+  grid-column: 3 / span 2;
+  grid-row: 2 / span 1;
+}
+#kanji .reading {
+  font-family: var(--japanese-font-family);
+  font-size: 1.4rem;
+}
+

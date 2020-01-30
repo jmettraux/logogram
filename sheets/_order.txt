@@ -1,1 +1,1 @@
-normalize.css variables.css site.css four_corners.css
+normalize.css variables.css site.css four_corners.css kanji.css
