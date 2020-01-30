@@ -11,6 +11,17 @@ var Kanji = (function() {
 
   // protected functions
 
+  var onToKana = function() {
+
+    H.forEach(elt, '.onyomi .reading', function(e) {
+      var t = H.text(e);
+      e.textContent =
+        wanakana.isKatakana(t) ?
+        wanakana.toHiragana(t) :
+        wanakana.toKatakana(t);
+    });
+  };
+
   var findKanji = function(lit) {
 
     return window.lgdata.kanji.find(function(k) { return k.lit === lit; });
@@ -18,7 +29,6 @@ var Kanji = (function() {
 
   var clean = function() {
 
-clog(elt);
     H.clean(elt, '.onyomi');
     H.clean(elt, '.kunyomi');
   };
@@ -50,6 +60,8 @@ clog(k);
   this.init = function() {
 
     elt = H.elt('#kanji');
+
+    H.on(elt, '.onyomi', 'click', onToKana);
   };
 
   // done.

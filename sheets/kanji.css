@@ -18,6 +18,7 @@
 #kanji .onyomi {
   grid-column: 3 / span 2;
   grid-row: 1 / span 1;
+  cursor: pointer;
 }
 #kanji .kunyomi {
   grid-column: 3 / span 2;

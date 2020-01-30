@@ -14,3 +14,5 @@ http://www.edrdg.org/wwwjdic/FOURCORNER.html
 
 MIT, see [LICENSE.txt](LICENSE.txt)
 
+http://wanakana.com/ is under an [MIT LICENSE](https://github.com/WaniKani/WanaKana/blob/master/LICENSE)
+

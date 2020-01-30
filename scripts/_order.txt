@@ -1,1 +1,1 @@
-h-1.2.0.min.js common.js box.js four_corners.js kanji.js on.js
+common.js box.js four_corners.js kanji.js on.js
