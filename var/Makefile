@@ -1,14 +1,6 @@
 
 all: dict.json dict.rb kanji.json kanji.rb radkfile.txt
 
-JMdict_e.xml:
-	wget http://ftp.monash.edu.au/pub/nihongo/JMdict_e.gz
-	gunzip JMdict_e.gz
-	mv JMdict_e JMdict_e.xml
-full_dict.json: JMdict_e.xml
-	ruby lib/jmdict_to.rb JMdict_e.xml json > full_dict.json
-full_dict.rb: JMdict_e.xml
-	ruby lib/jmdict_to.rb JMdict_e.xml ruby > full_dict.rb
 
 kanjidic2.xml:
 	wget http://www.edrdg.org/kanjidic/kanjidic2.xml.gz
@@ -26,10 +18,22 @@ kanji.json: select_kanji.json
 kanji.rb: select_kanji.json
 	ruby lib/kanji_index.rb select_kanji.json ruby > kanji.rb
 
-dict.json: kanji.json full_dict.json
-	ruby lib/dict_select.rb kanji.json full_dict.json json > dict.json
-dict.rb: kanji.json full_dict.json
-	ruby lib/dict_select.rb kanji.json full_dict.json ruby > dict.rb
+JMdict_e.xml:
+	wget http://ftp.monash.edu.au/pub/nihongo/JMdict_e.gz
+	gunzip JMdict_e.gz
+	mv JMdict_e JMdict_e.xml
+full_dict.json: JMdict_e.xml
+	ruby lib/jmdict_to.rb JMdict_e.xml json > full_dict.json
+full_dict.rb: JMdict_e.xml
+	ruby lib/jmdict_to.rb JMdict_e.xml ruby > full_dict.rb
+select_dict.json: select_kanji.json full_dict.json
+	ruby lib/dict_select.rb select_kanji.json full_dict.json json > select_dict.json
+select_dict.rb: select_kanji.json full_dict.json
+	ruby lib/dict_select.rb select_kanji.json full_dict.json ruby > select_dict.rb
+dict.json: select_kanji.json select_dict.json
+	ruby lib/dict_index.rb select_kanji.json select_dict.json json > dict.json
+dict.rb: select_kanji.json select_dict.json
+	ruby lib/dict_index.rb select_kanji.json select_dict.json ruby > dict.rb
 
 radkfile.txt:
 	wget http://ftp.monash.edu.au/pub/nihongo/kradzip.zip

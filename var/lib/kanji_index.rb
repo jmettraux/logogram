@@ -15,7 +15,7 @@ ks.each_with_index do |k, i|
   (rds['ja_kun'] || []).each { |r| (by_sound[r] ||= []) << i }
 end
 
-h = { items: ks, index: { by_sound: sounds } }
+h = { items: ks, index: { by_sound: by_sound } }
 
 case ARGV[1]
 when 'ruby', 'rb', '.rb' then pp(h)
