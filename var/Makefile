@@ -17,10 +17,14 @@ full_kanji.json: kanjidic2.xml
 	ruby lib/kanjidic_to.rb kanjidic2.xml json > full_kanji.json
 full_kanji.rb: kanjidic2.xml
 	ruby lib/kanjidic_to.rb kanjidic2.xml ruby > full_kanji.rb
-kanji.json: full_kanji.json
-	ruby lib/kanji_select.rb full_kanji.json json > kanji.json
-kanji.rb: full_kanji.json
-	ruby lib/kanji_select.rb full_kanji.json ruby > kanji.rb
+select_kanji.json: full_kanji.json
+	ruby lib/kanji_select.rb full_kanji.json json > select_kanji.json
+select_kanji.rb: full_kanji.json
+	ruby lib/kanji_select.rb full_kanji.json ruby > select_kanji.rb
+kanji.json: select_kanji.json
+	ruby lib/kanji_index.rb select_kanji.json json > kanji.json
+kanji.rb: select_kanji.json
+	ruby lib/kanji_index.rb select_kanji.json ruby > kanji.rb
 
 dict.json: kanji.json full_dict.json
 	ruby lib/dict_select.rb kanji.json full_dict.json json > dict.json
@@ -44,12 +48,14 @@ radkfile.txt:
 	rm radkfilex
 
 clean:
-	rm dict.rb
-	rm dict.json
-	rm kanji.rb
-	rm kanji.json
-	rm kradfile*.txt
-	rm radkfile*.txt
+	rm -f dict.rb
+	rm -f dict.json
+	rm -f kanji.rb
+	rm -f kanji.json
+	rm -f *_kanji.rb
+	rm -f *_kanji.json
+	rm -f kradfile*.txt
+	rm -f radkfile*.txt
 
 .PHONY: clean
 

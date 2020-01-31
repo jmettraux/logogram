@@ -30,14 +30,14 @@ es.each { |e|
       (index[k] ||= []) << r if r.length > 2 } } }
 
 seqs = es.each_with_index
-  .inject({}) { |h, (e, i)| h[e['seq']] = i; h }
+  .inject({}) { |h, (e, i)|
+    h[e['seq']] = i
+    h }
+
 index = index
   .inject({}) { |h, (k, v)|
     h[k] = v.collect { |seq, j, amz| [ seqs[seq], j, amz ] }
     h }
-      # "湘"=>[[2827426, 0, "a"], [2828098, 0, "a"]],
-      # "猷"=>[[2841688, 0, "z"]],
-      # "焰"=>[[2842696, 1, "m"]]}},
 
 r = { index: index, entries: es }
 
