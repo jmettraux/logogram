@@ -6,7 +6,7 @@ require 'set'
 require 'json'
 
 
-ks = JSON.parse(File.read(ARGV[0]))
+ks = JSON.parse(File.read(ARGV[0]))['kanji']
   .collect { |k| k['lit'] }
 
 index = {}
