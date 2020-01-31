@@ -10,6 +10,7 @@ var/*.rb
 var/*.xml
 var/*.txt
 var/*.json
+var/tmp/
 
 public/data.js
 public/site.js

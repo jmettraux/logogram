@@ -35,21 +35,20 @@ dict.json: select_kanji.json select_dict.json
 dict.rb: select_kanji.json select_dict.json
 	ruby lib/dict_index.rb $^ ruby > $@
 
-radkfile.txt:
+kradzip.zip:
 	wget http://ftp.monash.edu.au/pub/nihongo/kradzip.zip
-	unzip kradzip.zip
-	rm kradzip.zip
-	rm radkintro* kradintro
-	iconv -f EUC-JP -t UTF-8 kradfile2 > kradfile2.txt
-	iconv -f EUC-JP -t UTF-8 kradfile > kradfile.txt
-	iconv -f EUC-JP -t UTF-8 radkfile > radkfile.txt
-	iconv -f EUC-JP -t UTF-8 radkfile2 > radkfile2.txt
-	iconv -f EUC-JP -t UTF-8 radkfilex > radkfilex.txt
-	rm kradfile2
-	rm kradfile
-	rm radkfile
-	rm radkfile2
-	rm radkfilex
+	mkdir tmp
+	cd tmp && unzip ../kradzip.zip
+kradfile2.txt: kradzip.zip
+	iconv -f EUC-JP -t UTF-8 tmp/kradfile2 > $@
+kradfile.txt: kradzip.zip
+	iconv -f EUC-JP -t UTF-8 tmp/kradfile > $@
+radkfile.txt: kradzip.zip
+	iconv -f EUC-JP -t UTF-8 tmp/radkfile > $@
+radkfile2.txt: kradzip.zip
+	iconv -f EUC-JP -t UTF-8 tmp/radkfile2 > $@
+radkfilex.txt: kradzip.zip
+	iconv -f EUC-JP -t UTF-8 tmp/radkfilex > $@
 
 clean:
 	rm -f dict.rb
