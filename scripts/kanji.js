@@ -24,13 +24,15 @@ var Kanji = (function() {
 
   var findKanji = function(lit) {
 
-    return window.lgdata.kanji.find(function(k) { return k.lit === lit; });
+clog(window.lgdata.kanji);
+    return window.lgdata.kanji.items.find(function(k) { return k.lit === lit; });
   };
 
   var clean = function() {
 
     H.clean(elt, '.onyomi');
     H.clean(elt, '.kunyomi');
+    H.clean(elt, '.info');
   };
 
   // public functions
@@ -55,6 +57,19 @@ clog(k);
       function(r) { H.create(one, '.reading', {}, r); });
     (k.rds.ja_kun || []).forEach(
       function(r) { H.create(kune, '.reading', {}, r); });
+
+    var infoe = H.elt(elt, '.info');
+      //
+    var m = function(k, v) {
+      var e = H.create(infoe, '.entry', {}, '');
+      H.create(e, '.key', {}, '' + k);
+      H.create(e, '.value', {}, '' + v);
+      return e;
+    };
+      //
+    m('grade', k.grd);
+    m('jlpt', k.jlpt);
+    m('freq', k.frq || '>2500');
   };
 
   this.init = function() {

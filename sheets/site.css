@@ -8,7 +8,8 @@
 body {
   color: white;
   background-color: black;
-  -webkit-text-size-adjust:  none;
+  -webkit-text-size-adjust: none;
+  font-family: var(--latin-font-family);
 }
 
 #container {

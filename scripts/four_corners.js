@@ -79,7 +79,7 @@ var FourCorners = (function() {
 
     var pat = '^' + code.replace('.', '\\.').replace(/-/g, '.') + '$';
 
-    lgdata.kanji.forEach(function(k) {
+    lgdata.kanji.items.forEach(function(k) {
       var fc = k.qcs && k.qcs.four_corner;
       if ( ! fc) return;
       if (fc.match(pat)) H.create(list, '.box.kanji', {}, k.lit);
