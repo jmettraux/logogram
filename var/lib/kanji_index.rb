@@ -7,15 +7,15 @@ require 'json'
 
 ks = JSON.parse(File.read(ARGV[0]))
 
-sounds = {}
+by_sound = {}
 
 ks.each_with_index do |k, i|
   rds = k['rds'] || {}
-  (rds['ja_on'] || []).each { |r| (sounds[r] ||= []) << i }
-  (rds['ja_kun'] || []).each { |r| (sounds[r] ||= []) << i }
+  (rds['ja_on'] || []).each { |r| (by_sound[r] ||= []) << i }
+  (rds['ja_kun'] || []).each { |r| (by_sound[r] ||= []) << i }
 end
 
-h = { kanji: ks, sounds: sounds }
+h = { items: ks, index: { by_sound: sounds } }
 
 case ARGV[1]
 when 'ruby', 'rb', '.rb' then pp(h)
