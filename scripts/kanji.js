@@ -24,15 +24,19 @@ var Kanji = (function() {
 
   var findKanji = function(lit) {
 
-clog(window.lgdata.kanji);
-    return window.lgdata.kanji.items.find(function(k) { return k.lit === lit; });
+    return window.lgdata.kanji.items
+      .find(function(k) { return k.lit === lit; });
   };
+
+  //var findEntries = function(lit) {
+  //};
 
   var clean = function() {
 
     H.clean(elt, '.onyomi');
     H.clean(elt, '.kunyomi');
     H.clean(elt, '.info');
+    H.clean(elt, '.meanings');
   };
 
   // public functions
@@ -67,9 +71,15 @@ clog(k);
       return e;
     };
       //
-    m('grade', k.grd);
+    m('grd', k.grd);
     m('jlpt', k.jlpt);
-    m('freq', k.frq || '>2500');
+    m('frq', k.frq || '>2500');
+
+    var mse = H.elt(elt, '.meanings');
+    mse.textContent = (k.mns.en || []).join(', ');
+
+//    var es = findEntries(lit);
+//clog(es);
   };
 
   this.init = function() {

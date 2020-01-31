@@ -4,8 +4,8 @@
 #kanji {
   display: grid;
   grid-template-columns: var(--box-w4) var(--box-w2) var(--box-w2);
-  grid-template-rows: var(--box-h2) auto;
-  grid-column-gap: calc(var(--box-w) / 5);
+  grid-template-rows: var(--box-h3) auto;
+  grid-column-gap: calc(var(--box-w) / 7);
   grid-row-gap: calc(var(--box-w) / 3);
 }
 
@@ -29,5 +29,23 @@
 #kanji .reading {
   font-family: var(--japanese-font-family);
   font-size: 1.4rem;
+}
+#kanji .info {
+  margin-top: 0.77em;
+}
+#kanji .info .key {
+  display: inline-block;
+  width: 2.0em;
+}
+#kanji .info .value {
+  display: inline-block;
+}
+
+#kanji .meanings {
+  grid-column: 1 / span 3;
+  grid-row: 2 / span 1;
+  font-size: 175%;
+  padding-left: 0.28em;
+  padding-right: 0.28em;
 }
 
