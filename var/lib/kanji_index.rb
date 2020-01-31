@@ -7,6 +7,7 @@ require 'json'
 
 #def katakana?(s); !! s.match(/^\p{Katakana}+$/); end
 
+rs = ' ' + (0x2F00..0x2F00 + 213).collect { |i| i.chr(Encoding::UTF_8) }.join
 
 ks = JSON.parse(File.read(ARGV[0]))
 
@@ -23,6 +24,9 @@ ks.each_with_index do |k, i|
   (rds['ja_kun'] || []).each { |r|
     (by_kunyomi[r] ||= []) << i
     (by_kunyomi[r.split('.').first] ||= []) << i if r.index('.') }
+
+  classical = k.dig('rvs', 'classical')
+  k['clrd'] = rs[classical] if classical
 end
 
 by_onyomi = by_onyomi

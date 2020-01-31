@@ -72,8 +72,9 @@ clog(k);
     };
       //
     m('grd', k.grd);
-    m('jlpt', k.jlpt);
+    m('jlpt', k.jlpt || '');
     m('frq', k.frq || '>2500');
+    m('rad', k.clrd || '');
 
     var mse = H.elt(elt, '.meanings');
     mse.textContent = (k.mns.en || []).join(', ');
