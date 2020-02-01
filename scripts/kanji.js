@@ -28,7 +28,13 @@ var Kanji = (function() {
       .find(function(k) { return k.lit === lit; });
   };
 
+  //{:by_kanji=>
+  //  {"漢"=>
+  //    [[0, 0, "a"],
+  //     [1186, 0, "z"],
+  //     [4670, 0, "m"],
   //var findEntries = function(lit) {
+  //  return window.lgdata.kanji.items
   //};
 
   var clean = function() {
