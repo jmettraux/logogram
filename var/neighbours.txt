@@ -57,6 +57,7 @@
 豆短
 鬼塊魂
 夏復複
+兄況呪
 
 百
 項
@@ -78,6 +79,7 @@
 
 置
 直
+
 
 # I need a list of kanji ordered by stroke count
 
