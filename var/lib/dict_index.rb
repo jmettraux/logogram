@@ -21,18 +21,23 @@ es.each { |e|
     tm = t[1..-2]
     lits.each { |lit|
       r = [ e['seq'], i ]
-      r << 'a' if ta == lit
-      r << 'z' if tz == lit
-      r << 'm' if tm.index(lit)
-      (by_kanji[lit] ||= []) << r if r.length > 2 } } }
+      ((by_kanji[lit] ||= {})[:a] ||= []) << r if ta == lit
+      ((by_kanji[lit] ||= {})[:z] ||= []) << r if tz == lit
+      ((by_kanji[lit] ||= {})[:m] ||= []) << r if tm.index(lit) } } }
 
 seqs = es.each_with_index
   .inject({}) { |h, (e, i)|
     h[e['seq']] = i
     h }
 
-by_kanji = by_kanji
-  .inject({}) { |h, (k, v)| h[k] = v.map { |seq, *z| [ seqs[seq], *z ] }; h }
+by_kanji
+  .each { |_, azm|
+    azm.each { |_, a|
+      a.each { |si|
+#si << "XXX" unless seqs[si[0]]
+#p [ seqs[si[0]], '<--', si ]
+        si[0] = seqs[si[0]]
+} } }
 
 
 r = { items: es, index: { by_kanji: by_kanji } }
